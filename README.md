@@ -505,31 +505,26 @@ git clone https://github.com/jakedcl/pathbuilder.git
 cd pathbuilder
 ```
 
-**2. ⚠️ IMPORTANT: Add API key (Required!)**
+**2. ⚠️ Add Your API Key (ONE LINE!)**
 
-The app **will NOT build** without this step!
+Open `local.properties` (Android Studio will create it automatically when you open the project), and add this line at the end:
 
-```bash
-# Copy the template
-cp gradle.properties.template gradle.properties
-
-# Edit gradle.properties
-# Replace YOUR_API_KEY_HERE with your actual API key
+```properties
+ORS_API_KEY=your_actual_key_here
 ```
 
 **Get a free API key** (takes 2 minutes):
 1. Go to https://openrouteservice.org/dev/#/signup
-2. Sign up with email
-3. Confirm email
-4. Copy your API key from dashboard
-5. Paste it in `gradle.properties` where it says `YOUR_API_KEY_HERE`
+2. Sign up → Confirm email → Copy API key
+3. Paste it in `local.properties`
 
-**Why?** `gradle.properties` contains your personal API key and is gitignored for security. Each developer needs their own key.
+**That's it!** Android Studio will handle the rest.
 
 **3. Open in Android Studio**
 - File → Open → Select `pathbuilder` folder
-- Wait for Gradle sync (2-5 minutes)
-- If sync fails, check that `gradle.properties` has a real API key!
+- Android Studio auto-generates `local.properties` if missing
+- Add your API key to that file (see step 2)
+- Wait for Gradle sync
 - Click Run (Shift+F10)
 
 **4. Grant Location Permission**
@@ -540,6 +535,15 @@ cp gradle.properties.template gradle.properties
 - Android Studio (Hedgehog or newer)
 - Android SDK API 34
 - Emulator (Pixel 4+, API 34) or physical device
+
+---
+
+### Why `local.properties`?
+
+- ✅ **Already gitignored** by default in every Android project
+- ✅ **Auto-generated** by Android Studio when you open the project
+- ✅ **One simple edit** - just add one line
+- ✅ **Standard practice** - used for SDK paths and local configs
 
 ---
 
