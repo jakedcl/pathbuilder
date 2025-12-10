@@ -505,22 +505,41 @@ git clone https://github.com/jakedcl/pathbuilder.git
 cd pathbuilder
 ```
 
-**2. Add API key**
+**2. ⚠️ IMPORTANT: Add API key (Required!)**
+
+The app **will NOT build** without this step!
+
 ```bash
+# Copy the template
 cp gradle.properties.template gradle.properties
-# Edit gradle.properties, add your ORS API key
+
+# Edit gradle.properties
+# Replace YOUR_API_KEY_HERE with your actual API key
 ```
-Get free key at: https://openrouteservice.org/dev/#/signup (2 minutes)
+
+**Get a free API key** (takes 2 minutes):
+1. Go to https://openrouteservice.org/dev/#/signup
+2. Sign up with email
+3. Confirm email
+4. Copy your API key from dashboard
+5. Paste it in `gradle.properties` where it says `YOUR_API_KEY_HERE`
+
+**Why?** `gradle.properties` contains your personal API key and is gitignored for security. Each developer needs their own key.
 
 **3. Open in Android Studio**
 - File → Open → Select `pathbuilder` folder
 - Wait for Gradle sync (2-5 minutes)
+- If sync fails, check that `gradle.properties` has a real API key!
 - Click Run (Shift+F10)
 
-**4. Required**:
-- Android Studio (latest)
+**4. Grant Location Permission**
+- When app opens, allow location access
+- This lets the map center on your location
+
+**5. Requirements**:
+- Android Studio (Hedgehog or newer)
 - Android SDK API 34
-- Emulator or physical device
+- Emulator (Pixel 4+, API 34) or physical device
 
 ---
 
