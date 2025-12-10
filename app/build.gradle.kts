@@ -5,6 +5,13 @@ plugins {
     id("com.google.devtools.ksp") version "2.0.21-1.0.25"
 }
 
+// Read API key from local.properties
+val localProperties = java.util.Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(java.io.FileInputStream(localPropertiesFile))
+}
+
 android {
     namespace = "com.example.pathbuilder"
     compileSdk {
@@ -20,8 +27,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
-        // OpenRouteService API Key
-        buildConfigField("String", "ORS_API_KEY", "\"${project.findProperty("ORS_API_KEY") ?: ""}\"")
+        // OpenRouteService API Key from local.properties
+        val orsApiKey = localProperties.getProperty("ORS_API_KEY") ?: ""
+        buildConfigField("String", "ORS_API_KEY", "\"$orsApiKey\"")
     }
 
     buildTypes {
@@ -70,10 +78,9 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // Retrofit for OpenRouteService
+    // Retrofit (optional geocoding)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // OSMDroid for maps
     implementation("org.osmdroid:osmdroid-android:6.1.18")
